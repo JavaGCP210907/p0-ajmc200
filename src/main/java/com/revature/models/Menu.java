@@ -30,8 +30,8 @@ public class Menu {
 			System.out.println("viewFlightDestination -> View flights to specific destination");
 			System.out.println("viewBookings          -> View booked flights");
 			System.out.println("bookFlight            -> Book a flight");
-			System.out.println("updateBooking         -> exit application");
-			System.out.println("deleteBooking         -> exit application");
+			//System.out.println("updateBooking         -> Update departure date");
+			System.out.println("deleteBooking         -> Remove your booked flight");
 			System.out.println("exit                  -> exit application");
 			
 			String input = scan.nextLine();
@@ -97,6 +97,20 @@ public class Menu {
 				break;
 			}
 			
+			/*case "updateBooking": {
+				
+				System.out.println("Enter Role Title to change");
+				int passangerId = scan.nextInt();
+				scan.nextLine();
+				System.out.println("Enter departure date (YYYY-MM-DD)");
+				String dateInput = scan.nextLine();
+				
+				scan.nextLine();
+				
+				rDao.updateDate(passangerId, dateInput);
+				break;
+			}*/
+			
 			case "deleteBooking": {
 				
 				System.out.println("Enter the passenger id to delete");
@@ -111,21 +125,36 @@ public class Menu {
 				break;
 			}
 			
+			case "viewBookings": {
+				
+				List<Passenger> passenger = rDao.getPassenger();
+				
+				//enhanced for loop to print out the Employees one by one
+				for(Passenger emp : passenger) {
+					System.out.println(emp);
+				}
+				
+				//log.info("USER RETRIEVED LIST OF ALL EMPLOYEES");
+				
+				
+				break;
+			}
+			
 			case "exit": {
 				displayMenu = false; //this is how we break out of the while loop, ending the menu display
-				System.out.println("see ya! come again soon.");
+				System.out.println("Thank you for using Scuffed Airlines.");
 				break;
 			}
 			
 			//this default block will catch anything that doesn't match a menu option
 			default: {
-				System.out.println("What did you say?? try again buddy.");
+				System.out.println("Sorry please try again");
 				break;
 			}
 			
 			} //end switch
 		}//end while
-		System.out.println("Thank you for using the Krusty Krab EMS");
+		System.out.println("Thank you please come again soon");
 		scan.close();
 	}
 }
