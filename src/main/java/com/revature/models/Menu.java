@@ -3,6 +3,9 @@ package com.revature.models;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.dao.FlightDao;
 import com.revature.dao.PassengerDao;
 
@@ -10,6 +13,8 @@ public class Menu {
 
 	FlightDao eDao = new FlightDao(); //so we can use the EmployeeDao methods
 	PassengerDao rDao = new PassengerDao(); //so we can use the RoleDao methods
+	Logger log = LogManager.getLogger(Menu.class); //Logger object so that we can implement Logging
+	
 	public void displayMenu() {
 		
 		boolean displayMenu = true; //to toggle whether the menu continues after user input
@@ -48,7 +53,7 @@ public class Menu {
 					System.out.println(emp);
 				}
 				
-				//log.info("USER RETRIEVED LIST OF ALL EMPLOYEES");
+				log.info("USER RETRIEVED LIST OF ALL FLIGHTS");
 				
 				break;
 			}
@@ -64,6 +69,7 @@ public class Menu {
 				{
 					System.out.println(e); //print them out one by one via the enhanced for loop
 				}
+				
 				break;				
 				
 			}
@@ -94,6 +100,7 @@ public class Menu {
 				
 				rDao.addPassenger(emp);
 				
+				log.info("USER BOOKED A FLIGHT TO "+ flightId);
 				break;
 			}
 			
@@ -120,7 +127,7 @@ public class Menu {
 				
 				rDao.removePassenger(id);
 				
-				//log.warn("USER DELETED EMPLOYEE " + id);
+				log.warn("USER DELETED BOOKING FOR PASSENGER " + id);
 				
 				break;
 			}
@@ -133,16 +140,14 @@ public class Menu {
 				for(Passenger emp : passenger) {
 					System.out.println(emp);
 				}
-				
-				//log.info("USER RETRIEVED LIST OF ALL EMPLOYEES");
-				
+							
 				
 				break;
 			}
 			
 			case "exit": {
 				displayMenu = false; //this is how we break out of the while loop, ending the menu display
-				System.out.println("Thank you for using Scuffed Airlines.");
+				System.out.println("Thank you for using Scuffed Airlines,");
 				break;
 			}
 			
@@ -154,7 +159,7 @@ public class Menu {
 			
 			} //end switch
 		}//end while
-		System.out.println("Thank you please come again soon");
+		System.out.println("Please come again soon.");
 		scan.close();
 	}
 }
